@@ -5,10 +5,10 @@ with open("README.md", encoding="utf-8") as f:
 
 setup(
     name='scrathon-payments',
-    version='0.0.0',
-    author='NAME',
-    author_email='EMAIL',
-    description='DESCRIPTION',
+    version='0.0.1',
+    author='Ryan_shamu',
+    author_email='Ryanshamu418@gmail.com',
+    description='API Wrapper for ScrathonPayments',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/Ryan-shamu-YT/ScrathonPayments',
