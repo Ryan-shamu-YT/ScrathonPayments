@@ -5,7 +5,7 @@ with open("README.md", encoding="utf-8") as f:
 
 setup(
     name='scrathon-payments',
-    version='0.1',
+    version='0.0.0',
     author='NAME',
     author_email='EMAIL',
     description='DESCRIPTION',
