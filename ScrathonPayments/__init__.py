@@ -1,17 +1,28 @@
-import json
-import re
+import scratchattach as scratch3
 import requests
-
 
 class Scrathon():
 
     def __init__(self, username):
-        self.username = str(username)
+        self.username = "None"
+        try:
+            scratch3.get_user(username)
+            userexists = True
+        except scratch3.exceptions.UserNotFound:
+            userexists = False
+        if userexists:
+            if requests.post("https://scrathon.justablock.online:1111/userexist/", json={"username": username}).json == {"userexist": "True"}:
+                self.username = str(username)
+            else:
+                print("User {} did not use Scrathon before!".format(username))
+        else:
+            print("User {} does not exist on scratch!".format(username))
 
-        print("Started Scrathon as {}! All funds earned will go to mentioned user".format(username))
+        if self.username != "None":
+            print("Started Scrathon as {}! All funds earned will go to mentioned user".format(self.username))
 
     def purchase(self, price, user):
-        request = requests.post("https://scrathon.justablock.online/transaction", json={
+        request = requests.post("https://scrathon.justablock.online:1111/transaction", json={
             "price": price,
             "buyer": user,
             "seller": self.username
@@ -20,7 +31,7 @@ class Scrathon():
         return request.content
     
     def purchasecheck(self, price, user):
-        request = requests.post("https://scrathon.justablock.online/checkpurchase", json={
+        request = requests.post("https://scrathon.justablock.online:1111/checkpurchase", json={
             "price": price,
             "buyer": user,
             "seller": self.username
