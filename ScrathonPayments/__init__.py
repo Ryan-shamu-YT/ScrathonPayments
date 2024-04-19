@@ -28,7 +28,7 @@ class Scrathon():
             "seller": self.username
         })
 
-        return request.content
+        return request.json()
     
     def purchasecheck(self, price, user):
         request = requests.post("http://196.27.127.58:12211/checkpurchase", json={
@@ -37,5 +37,4 @@ class Scrathon():
             "seller": self.username
         })
 
-        return request.content
-
+        return request.json()
