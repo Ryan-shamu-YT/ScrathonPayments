@@ -11,7 +11,7 @@ class Scrathon():
         except scratch3.exceptions.UserNotFound:
             userexists = False
         if userexists:
-            if requests.post("http://196.27.127.58:12211/userexist/", json={"username": username}).json == {"userexist": "True"}:
+            if requests.post("http://45.140.188.129:6623/userexist/", json={"username": username}).json == {"userexist": "True"}:
                 self.username = str(username)
             else:
                 print("User {} did not use Scrathon before!".format(username))
@@ -22,7 +22,7 @@ class Scrathon():
             print("Started Scrathon as {}! All funds earned will go to mentioned user".format(self.username))
 
     def purchase(self, price, user):
-        request = requests.post("http://196.27.127.58:12211/transaction", json={
+        request = requests.post("http://45.140.188.129:6623//transaction", json={
             "price": price,
             "buyer": user,
             "seller": self.username
@@ -31,7 +31,7 @@ class Scrathon():
         return request.json()
     
     def purchasecheck(self, price, user):
-        request = requests.post("http://196.27.127.58:12211/checkpurchase", json={
+        request = requests.post("http://45.140.188.129:6623//checkpurchase", json={
             "price": price,
             "buyer": user,
             "seller": self.username
