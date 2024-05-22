@@ -11,7 +11,7 @@ class Scrathon():
         except scratch3.exceptions.UserNotFound:
             userexists = False
         if userexists:
-            if requests.post("http://45.140.188.129:6623/userexist/", json={"username": username}).json == {"userexist": "True"}:
+            if requests.post("http://45.140.188.129:6623/userexist/", json={"username": username}).json() == {"userexist": "True"}:
                 self.username = str(username)
             else:
                 print("User {} did not use Scrathon before!".format(username))
