@@ -21,7 +21,7 @@ class Scrathon():
         if self.username != "None":
             print("Started Scrathon as {}! All funds earned will go to mentioned user".format(self.username))
 
-    def purchase(self, price, user):
+    def purchase(price, user):
         request = requests.post("http://45.140.188.129:6623/transaction", json={
             "price": price,
             "buyer": user,
@@ -30,7 +30,7 @@ class Scrathon():
 
         return request.json()
     
-    def purchasecheck(self, price, user):
+    def purchasecheck(price, user):
         request = requests.post("http://45.140.188.129:6623/checkpurchase", json={
             "price": price,
             "buyer": user,
