@@ -30,7 +30,7 @@ client.run()
 
 #Guess what? That's it!
 ```
-Check out the example project here:
+Check out the example project here: https://scratch.mit.edu/projects/996449477/
 
 ## Methods
 ```Scrathon() ```   *Initiates a project connection to Scrathon services.*
