@@ -8,77 +8,37 @@ You can install Scrathon via pip: ```pip install scrathon-payments```
 
 ## Usage with [Scratchattach](https://github.com/TimMcCool/scratchattach)
 
-To use Scrathon, you need to instantiate the `Scrathon` class with a valid username. This username will be used to authenticate and perform transactions on the Scrathon platform.
+To use Scrathon, you need to instantiate the `Scrathon` class with a valid username and scratchattach cloud requests client. These will be used to authenticate and perform transactions on the Scrathon platform.
 
 
 ```python
+from os import system
+system("pip install scratchattach --upgrade")
+system("pip install scrathon-payments --upgrade")
 import scratchattach as scratch3
-from ScrathonPayments import Scrathon #pip install scrathon-payments
+from ScrathonPayments import Scrathon
 
-session = scratch3.login("USERNAME_OF_ANY_ACCOUNT_(ACCOUNT_CAN_BE_NEW_SCRATCHER)", "PASSWORD")
+session = scratch3.login("username of any account (can be an alt with new scratcher)", "password of the account")
 
-conn = session.connect_cloud("YOUR_PROJECT_ID")
-
-ScrathonPayments = Scrathon("USERNAME_OF_ACCOUNT_TO_RECEIVE_FUNDS")
+conn = session.connect_cloud("YOUR PROJECT ID")
 
 client = scratch3.CloudRequests(conn)
 
-@client.request
-def purchase(username, Price):
-    Purchase = ScrathonPayments.purchase(Price, username)
-    result = "None"
-    if Purchase == "You have been banned from selling items in your projects!":
-        result = "Fail!"
-        
-        #In scratch, tell the user the transaction failed
-        
-    elif Purchase == "User does not have enough money to buy the item!":
-        result = "Not enough coins!"
-        #In scratch, tell the user they do not have enough coins to make the purchase
-    elif Purchase == "Transaction has been added to pending transactions, transaction will go through once the user has confirmed!":
-        #In scratch, tell your users to look at the comments of the Scrathon project and find their verification comment in the project's comments, reply to it with 'yes' and the transaction will go through!
-        result = "Success!"
-    
-    return result
-
-@client.request
-def purchasecheck(username, Price): #Check if the player bought the item so you can give them the promised item (If you don't give the item to the player you will get banned from selling items)
-    PurchaseCheck = ScrathonPayments.purchasecheck(Price, username)
-
-    return PurchaseCheck
+ScrathonPayments = Scrathon("username of account to receive coins", client)
 
 client.run()
-```
 
+#Guess what? That's it!
+```
+Check out the example project here:
 
 ## Methods
-```purchase() ```   *Initiates a purchase transaction.*
+```Scrathon() ```   *Initiates a project connection to Scrathon services.*
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `Price` | `int` | **Required**. Price the buyer is paying |
-| `User` | `str` | **Required**. User paying for your item |
+| `User` | `str` | **Required**. User to receive funds from purchases |
+| `Client` | `scratchattach.CloudRequests` | **Required**. Scratchattach Client |
 
-Returns:
-```
-Status of the transaction, e.g: 
-"Transaction has been added to pending transactions, transaction will go through once the user has confirmed!"
 
-"User does not have enough money to buy the item!""
-
-and "You have been banned from selling items in your projects!"
-```
-
-```purchasecheck()```  *Checks the status of a purchase transaction.*
-
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `Price` | `int` | **Required**. Price the buyer had paid |
-| `User` | `str` | **Required**. User who paid for your item |
-
-Returns:
-```
-True: The transaction went through (give their item)
-
-False: The transaction did not go through!
 ```
