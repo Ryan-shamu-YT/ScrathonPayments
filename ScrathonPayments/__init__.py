@@ -32,7 +32,7 @@ class Scrathon:
                 "seller": self.username
             })
             try:
-                success = request.json().get("success")
+                success = str(request.json().get("success")) == "True"
             except Exception as e:
                 print(f"Didn't recognise json: {request.text}")
                 raise e from None
@@ -46,7 +46,7 @@ class Scrathon:
                 "seller": self.username
             })
             try:
-                success = request.json().get("success")
+                success = str(request.json().get("success")) == "True"
             except Exception as e:
                 print(f"Didn't recognise json: {request.text}")
                 raise e from None
