@@ -37,7 +37,15 @@ class Scrathon:
                 print(f"Didn't recognise json: {request.text}")
                 raise e from None
             return convert[success]
-            
+        @client.request
+        def userexist():
+            request = requests.post("http://45.140.188.129:6623/userexist/", json={"username": username})
+            try:
+                success = str(request.json().get("userexist")) == "True"
+            except Exception as e:
+                print(f"Didn't recognise json: {request.text}")
+                raise e from None
+            return convert[success]
         @client.request
         def purchasecheck(price):
             request = requests.post("http://45.140.188.129:6623/checkpurchase", json={
