@@ -39,7 +39,7 @@ class Scrathon:
             return convert[success]
         @client.request
         def userexist():
-            request = requests.post("http://45.140.188.129:6623/userexist/", json={"username": username})
+            request = requests.post("http://45.140.188.129:6623/userexist/", json={"username": client.get_requester()})
             try:
                 success = str(request.json().get("userexist")) == "True"
             except Exception as e:
