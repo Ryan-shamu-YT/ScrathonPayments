@@ -14,7 +14,7 @@ class Scrathon:
         except scratch3.exceptions.UserNotFound:
             userexists = False
         if userexists:
-            if requests.post("http://45.140.188.129:6623/userexist/", json={"username": username}).json() == {"userexist": "True"}:
+            if requests.post("http://198.251.67.135:6623/userexist/", json={"username": username}).json() == {"userexist": "True"}:
                 self.username = str(username)
             else:
                 raise ValueError("User {} did not use Scrathon before!".format(username))
@@ -26,7 +26,7 @@ class Scrathon:
 
         @client.request
         def purchase(price):
-            request = requests.post("http://45.140.188.129:6623/transaction", json={
+            request = requests.post("http://198.251.67.135:6623/transaction", json={
                 "price": price,
                 "buyer": client.get_requester(),
                 "seller": self.username
@@ -39,7 +39,7 @@ class Scrathon:
             return convert[success]
         @client.request
         def userexist():
-            request = requests.post("http://45.140.188.129:6623/userexist/", json={"username": client.get_requester()})
+            request = requests.post("http://198.251.67.135:6623/userexist/", json={"username": client.get_requester()})
             try:
                 success = str(request.json().get("userexist")) == "True"
             except Exception as e:
@@ -48,7 +48,7 @@ class Scrathon:
             return convert[success]
         @client.request
         def purchasecheck(price):
-            request = requests.post("http://45.140.188.129:6623/checkpurchase", json={
+            request = requests.post("http://198.251.67.135:6623/checkpurchase", json={
                 "price": price,
                 "buyer": client.get_requester(),
                 "seller": self.username
